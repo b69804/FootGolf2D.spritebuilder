@@ -59,36 +59,6 @@
 									<key>name</key>
 									<string>rotation</string>
 									<key>time</key>
-									<real>0.0</real>
-									<key>type</key>
-									<integer>2</integer>
-									<key>value</key>
-									<real>0.0</real>
-								</dict>
-								<dict>
-									<key>easing</key>
-									<dict>
-										<key>type</key>
-										<integer>1</integer>
-									</dict>
-									<key>name</key>
-									<string>rotation</string>
-									<key>time</key>
-									<real>2</real>
-									<key>type</key>
-									<integer>2</integer>
-									<key>value</key>
-									<real>-179.89999389648438</real>
-								</dict>
-								<dict>
-									<key>easing</key>
-									<dict>
-										<key>type</key>
-										<integer>1</integer>
-									</dict>
-									<key>name</key>
-									<string>rotation</string>
-									<key>time</key>
 									<real>4</real>
 									<key>type</key>
 									<integer>2</integer>

@@ -6,8 +6,16 @@
 //  Copyright (c) 2015 Apportable. All rights reserved.
 //
 
-#import "CCScene.h"
-
 @interface Level1 : CCScene
+{
+    int score;
+    CCNode *_arrow;
+    CCNode *_soccerBall;
+    CCNode *_ground;
+    CCNode *thisIsATree;
+    CCSlider *slideBar;
+    CCLabelTTF *_par;
+    CCPhysicsNode *_physicsNode;
+}
 
 @end
