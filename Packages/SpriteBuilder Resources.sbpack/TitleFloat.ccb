@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>2</integer>
+	<integer>6</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -146,7 +146,7 @@
 							<key>type</key>
 							<integer>3</integer>
 						</dict>
-						<key>rotation</key>
+						<key>spriteFrame</key>
 						<dict>
 							<key>keyframes</key>
 							<array>
@@ -154,22 +154,61 @@
 									<key>easing</key>
 									<dict>
 										<key>type</key>
-										<integer>1</integer>
+										<integer>0</integer>
 									</dict>
 									<key>name</key>
-									<string>rotation</string>
+									<string>spriteFrame</string>
 									<key>time</key>
-									<real>4</real>
+									<real>1</real>
 									<key>type</key>
-									<integer>2</integer>
+									<integer>7</integer>
 									<key>value</key>
-									<real>0.0</real>
+									<array>
+										<string>ImageAssets/Title_03.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>spriteFrame</string>
+									<key>time</key>
+									<real>2</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ImageAssets/logoFG_medium.png</string>
+										<string>Use regular file</string>
+									</array>
+								</dict>
+								<dict>
+									<key>easing</key>
+									<dict>
+										<key>type</key>
+										<integer>0</integer>
+									</dict>
+									<key>name</key>
+									<string>spriteFrame</string>
+									<key>time</key>
+									<real>3</real>
+									<key>type</key>
+									<integer>7</integer>
+									<key>value</key>
+									<array>
+										<string>ImageAssets/logoFG_light.png</string>
+										<string>Use regular file</string>
+									</array>
 								</dict>
 							</array>
 							<key>name</key>
-							<string>rotation</string>
+							<string>spriteFrame</string>
 							<key>type</key>
-							<integer>2</integer>
+							<integer>7</integer>
 						</dict>
 					</dict>
 				</dict>
@@ -240,15 +279,10 @@
 					</dict>
 					<dict>
 						<key>baseValue</key>
-						<real>0.0</real>
-						<key>name</key>
-						<string>rotation</string>
-						<key>type</key>
-						<string>Degrees</string>
-						<key>value</key>
-						<real>0.0</real>
-					</dict>
-					<dict>
+						<array>
+							<string>ImageAssets/Title_03.png</string>
+							<string>Use regular file</string>
+						</array>
 						<key>name</key>
 						<string>spriteFrame</string>
 						<key>type</key>

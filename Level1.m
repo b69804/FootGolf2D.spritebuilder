@@ -6,6 +6,8 @@
 @implementation Level1
 {
     CCButton *nextLevel;
+    CCButton *pause;
+    CCButton *resume;
 }
 
 
@@ -20,20 +22,22 @@
 }
 
 -(void)onEnter{
-
-    score = 0;
-    
-    [_par setString:[NSString stringWithFormat:@"%d", score]];
+    // Cant quite this to have the proper physics for flight but I am working on that
+    _soccerBall = [CCSprite spriteWithImageNamed:@"ImageAssets/BallHD_03.png"];
+    _soccerBall.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:6.5 andCenter:CGPointMake(0.0, 0.0)];
+    _soccerBall.position = ccp(54.8, 99.7);
+    _soccerBall.physicsBody.density = 1.0;
+    _soccerBall.physicsBody.friction = 0.30;
+    _soccerBall.physicsBody.elasticity = 0.30;
+    _soccerBall.physicsBody.allowsRotation = NO;
+    [_physicsNode addChild:_soccerBall];
     
     [super onEnter];
-
 }
 
 -(void)hitBall:(id)sender{
     
-    int newScore = score++;
-    
-    [_par setString:[NSString stringWithFormat:@"%d", newScore]];
+    [self changeScore];
     
     float betterAngle;
     
@@ -41,28 +45,57 @@
     NSLog(@"%f", angleOfArrow);
     betterAngle = (angleOfArrow * -1.00);
     NSLog(@"%f", betterAngle);
-    CGPoint direction = ccp(sinf(betterAngle), cosf(betterAngle));
+    CGPoint direction = ccp(cosf(betterAngle), sinf(betterAngle));
+    NSLog(@"%@", NSStringFromCGPoint(direction));
     float forceValue = 50;
     CGPoint shootAmount = ccpMult(direction, forceValue);
     [_soccerBall.physicsBody applyImpulse:(shootAmount)];
     
     [[OALSimpleAudio sharedInstance] playEffect:@"SportGolf DM006_62.wav"];
     
-    [self update:3.0];
-    
 }
 
+// I have no idea why this stops updating after it gets to 2!
+-(void)changeScore{
+    if (score == 0){
+        [_par setString:[NSString stringWithFormat:@"1"]];
+        score = 1;
+    } else {
+        int newScore = (score + 1);
+        NSLog(@"%d", newScore);
+        [_par setString:[NSString stringWithFormat:@"%d", newScore]];
+    }
+}
+
+// This resets the ball to the starting position after going off screen
 - (void)update:(CCTime)delta{
     if (_soccerBall.position.x <= 0){
-        [_soccerBall removeFromParentAndCleanup:YES];
+        [_soccerBall removeFromParent];
         _soccerBall = [CCSprite spriteWithImageNamed:@"ImageAssets/BallHD_03.png"];
-        _soccerBall.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:6.66 andCenter:CGPointMake(0.5, 0.5)];
+        _soccerBall.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:6.5 andCenter:CGPointMake(0.0, 0.0)];
+        _soccerBall.physicsBody.density = 1.0;
+        _soccerBall.physicsBody.friction = 0.30;
+        _soccerBall.physicsBody.elasticity = 0.30;
         _soccerBall.position = ccp(54.8, 99.7);
-        
-        [self addChild:_soccerBall];
+        _soccerBall.physicsBody.allowsRotation = NO;
         [_physicsNode addChild:_soccerBall];
     }
     
+    if (_soccerBall.position.y >= 320){
+        [_soccerBall removeFromParent];
+        _soccerBall = [CCSprite spriteWithImageNamed:@"ImageAssets/BallHD_03.png"];
+        _soccerBall.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:6.5 andCenter:CGPointMake(0.0, 0.0)];
+        _soccerBall.physicsBody.density = 1.0;
+        _soccerBall.physicsBody.friction = 0.30;
+        _soccerBall.physicsBody.elasticity = 0.30;
+        _soccerBall.position = ccp(54.8, 99.7);
+        _soccerBall.physicsBody.allowsRotation = NO;
+        [_physicsNode addChild:_soccerBall];
+    }
+    
+    
+    
+    // Once I get the physics worked out, this will identify if the is in the cup.  I will then transition the scene to the next level
     if (_soccerBall.position.x <= 465.0 && _soccerBall.position.y <= 110.0 && _soccerBall.position.x >= 459.0 && _soccerBall.position.y >= 108.0) {
         NSLog(@"Ball is in the hole.");
     }
@@ -86,6 +119,14 @@
     CCScene *secondLevel = [CCBReader loadAsScene:@"Level2"];
     [[CCDirector sharedDirector] replaceScene:secondLevel withTransition:transition];
     
+}
+
+-(void)pause:(id)sender{
+    [[CCDirector sharedDirector] pause];
+}
+
+-(void)resume:(id)sender{
+    [[CCDirector sharedDirector] resume];
 }
 
 @end
