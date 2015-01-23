@@ -78,10 +78,57 @@
 			<key>previewFolderHidden</key>
 			<true/>
 		</dict>
+		<key>FGBkgrnd.png</key>
+		<dict/>
 		<key>ImageAssets</key>
 		<dict>
 			<key>isSmartSpriteSheet</key>
 			<true/>
+		</dict>
+		<key>ImageAssets/BallHD_03.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>ImageAssets/Level1_02.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>ImageAssets/Level2HD_02.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>ImageAssets/Title_03.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>ImageAssets/TreeHD_03.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>ImageAssets/Tree_03.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>ImageAssets/large.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>ImageAssets/logoFG_light.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
+		</dict>
+		<key>ImageAssets/logoFG_medium.png</key>
+		<dict>
+			<key>scaleFrom</key>
+			<integer>4</integer>
 		</dict>
 		<key>Sprites</key>
 		<dict/>

@@ -24,7 +24,7 @@
 -(void)onEnter{
     // Cant quite this to have the proper physics for flight but I am working on that
     _soccerBall = [CCSprite spriteWithImageNamed:@"ImageAssets/BallHD_03.png"];
-    _soccerBall.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:6.5 andCenter:CGPointMake(0.0, 0.0)];
+    _soccerBall.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:(_soccerBall.contentSize.width/2) andCenter:CGPointMake(8.0, 8.0)];
     _soccerBall.position = ccp(54.8, 99.7);
     _soccerBall.physicsBody.density = 1.0;
     _soccerBall.physicsBody.friction = 0.30;
@@ -72,7 +72,7 @@
     if (_soccerBall.position.x <= 0){
         [_soccerBall removeFromParent];
         _soccerBall = [CCSprite spriteWithImageNamed:@"ImageAssets/BallHD_03.png"];
-        _soccerBall.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:6.5 andCenter:CGPointMake(0.0, 0.0)];
+        _soccerBall.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:(_soccerBall.contentSize.width/2) andCenter:CGPointMake(8.0, 8.0)];
         _soccerBall.physicsBody.density = 1.0;
         _soccerBall.physicsBody.friction = 0.30;
         _soccerBall.physicsBody.elasticity = 0.30;
@@ -81,10 +81,22 @@
         [_physicsNode addChild:_soccerBall];
     }
     
-    if (_soccerBall.position.y >= 320){
+    if (_soccerBall.position.y >= 335){
         [_soccerBall removeFromParent];
         _soccerBall = [CCSprite spriteWithImageNamed:@"ImageAssets/BallHD_03.png"];
-        _soccerBall.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:6.5 andCenter:CGPointMake(0.0, 0.0)];
+        _soccerBall.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:(_soccerBall.contentSize.width/2) andCenter:CGPointMake(8.0, 8.0)];
+        _soccerBall.physicsBody.density = 1.0;
+        _soccerBall.physicsBody.friction = 0.30;
+        _soccerBall.physicsBody.elasticity = 0.30;
+        _soccerBall.position = ccp(54.8, 99.7);
+        _soccerBall.physicsBody.allowsRotation = NO;
+        [_physicsNode addChild:_soccerBall];
+    }
+    
+    if (_soccerBall.position.x >= 565){
+        [_soccerBall removeFromParent];
+        _soccerBall = [CCSprite spriteWithImageNamed:@"ImageAssets/BallHD_03.png"];
+        _soccerBall.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:(_soccerBall.contentSize.width/2) andCenter:CGPointMake(8.0, 8.0)];
         _soccerBall.physicsBody.density = 1.0;
         _soccerBall.physicsBody.friction = 0.30;
         _soccerBall.physicsBody.elasticity = 0.30;
@@ -96,8 +108,16 @@
     
     
     // Once I get the physics worked out, this will identify if the is in the cup.  I will then transition the scene to the next level
-    if (_soccerBall.position.x <= 465.0 && _soccerBall.position.y <= 110.0 && _soccerBall.position.x >= 459.0 && _soccerBall.position.y >= 108.0) {
+    if (_soccerBall.position.x <= 470.0 && _soccerBall.position.y <= 118.0 && _soccerBall.position.x >= 457.0 && _soccerBall.position.y >= 108.0) {
         NSLog(@"Ball is in the hole.");
+        
+        [[OALSimpleAudio sharedInstance] playEffect:@"Applause.wav"];
+        
+        id transition = [CCTransition transitionFadeWithDuration:3.0];
+        
+        CCScene *secondLevel = [CCBReader loadAsScene:@"Level2"];
+        [[CCDirector sharedDirector] replaceScene:secondLevel withTransition:transition];
+        [_soccerBall removeFromParent];
     }
     
 }
