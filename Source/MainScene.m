@@ -7,6 +7,7 @@
 {
     CCButton *startGame;
     CCButton *nextLevel;
+    CCButton *instructions;
     BOOL remove;
 }
 
@@ -21,6 +22,21 @@
 
     [[CCDirector sharedDirector] replaceScene:firstLevel];
     
+}
+
+-(void)instructions:(id)sender{
+
+    CCScene *instruct = [CCBReader loadAsScene:@"Instructions"];
+
+    [[CCDirector sharedDirector] replaceScene:instruct];
+}
+
+-(void)showCredits:(id)sender{
+
+    CCScene *cred = [CCBReader loadAsScene:@"Level2"];
+    
+    [[CCDirector sharedDirector] replaceScene:cred];
+
 }
 
 

@@ -12,6 +12,11 @@
 		5B12102A197484DD004C1E1D /* FootGolf_DActivity.java in Sources */ = {isa = PBXBuildFile; fileRef = 5B12101B19748413004C1E1D /* FootGolf_DActivity.java */; };
 		5B121030197484FA004C1E1D /* FootGolf_DActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B12102F197484FA004C1E1D /* FootGolf_DActivity.m */; };
 		5B121038197487F2004C1E1D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B737893E1807617C0076A88C /* AppDelegate.m */; };
+		5D00393E1A7AAF32000D2E66 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5D00393D1A7AAF32000D2E66 /* Launch Screen.xib */; };
+		5D0039401A7AB02A000D2E66 /* Launch3X_8_port.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D00393F1A7AB02A000D2E66 /* Launch3X_8_port.png */; };
+		5D0039421A7AB064000D2E66 /* Launch4X.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D0039411A7AB064000D2E66 /* Launch4X.png */; };
+		5D0039451A7AD853000D2E66 /* Instructions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D0039441A7AD853000D2E66 /* Instructions.m */; };
+		5D187A241A7B11A600EBDF37 /* Credits.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D187A231A7B11A600EBDF37 /* Credits.m */; };
 		5D86F5781A60AA6400D9CE90 /* Level1.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D86F5771A60AA6400D9CE90 /* Level1.m */; };
 		7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */ = {isa = PBXBuildFile; fileRef = B7378993180767190076A88C /* MainScene.m */; };
 		7A40360419DDEE84007B6E8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A40360319DDEE84007B6E8F /* main.m */; };
@@ -182,6 +187,13 @@
 		5B121033197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/Android/Info.plist; sourceTree = "<group>"; };
 		5B121034197485FE004C1E1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Platforms/iOS/Info.plist; sourceTree = "<group>"; };
 		5BA4619E1974C88900785744 /* AndroidManifest.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = AndroidManifest.xml; path = Platforms/Android/AndroidManifest.xml; sourceTree = "<group>"; };
+		5D00393D1A7AAF32000D2E66 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		5D00393F1A7AB02A000D2E66 /* Launch3X_8_port.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Launch3X_8_port.png; path = ../../../../Documents/images/images/Launch3X_8_port.png; sourceTree = "<group>"; };
+		5D0039411A7AB064000D2E66 /* Launch4X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Launch4X.png; path = ../../../../Documents/images/images/Launch4X.png; sourceTree = "<group>"; };
+		5D0039431A7AD853000D2E66 /* Instructions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Instructions.h; sourceTree = "<group>"; };
+		5D0039441A7AD853000D2E66 /* Instructions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Instructions.m; sourceTree = "<group>"; };
+		5D187A221A7B11A600EBDF37 /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credits.h; sourceTree = "<group>"; };
+		5D187A231A7B11A600EBDF37 /* Credits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Credits.m; sourceTree = "<group>"; };
 		5D86F5761A60AA6400D9CE90 /* Level1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level1.h; sourceTree = "<group>"; };
 		5D86F5771A60AA6400D9CE90 /* Level1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level1.m; sourceTree = "<group>"; };
 		7A4035FF19DDEE84007B6E8F /* FootGolf2D Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FootGolf2D Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -466,6 +478,11 @@
 				D352B48019EC608A00829775 /* MetalShaders */,
 				5D86F5761A60AA6400D9CE90 /* Level1.h */,
 				5D86F5771A60AA6400D9CE90 /* Level1.m */,
+				5D00393D1A7AAF32000D2E66 /* Launch Screen.xib */,
+				5D0039431A7AD853000D2E66 /* Instructions.h */,
+				5D0039441A7AD853000D2E66 /* Instructions.m */,
+				5D187A221A7B11A600EBDF37 /* Credits.h */,
+				5D187A231A7B11A600EBDF37 /* Credits.m */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -473,6 +490,8 @@
 		B73789911807667A0076A88C /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				5D00393F1A7AB02A000D2E66 /* Launch3X_8_port.png */,
+				5D0039411A7AB064000D2E66 /* Launch4X.png */,
 				B71F5907188484E7003F4D28 /* iPad-old.png */,
 				B71F5908188484E7003F4D28 /* iPad-old@2x.png */,
 				B71F5909188484E7003F4D28 /* iPad.png */,
@@ -771,6 +790,7 @@
 			files = (
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
+				5D0039421A7AB064000D2E66 /* Launch4X.png in Resources */,
 				B71F5914188484E7003F4D28 /* iPad@2x.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
@@ -782,7 +802,9 @@
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
+				5D00393E1A7AAF32000D2E66 /* Launch Screen.xib in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
+				5D0039401A7AB02A000D2E66 /* Launch3X_8_port.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -869,6 +891,8 @@
 				5D86F5781A60AA6400D9CE90 /* Level1.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				7A046D8C19E8A20E004C4763 /* MainScene.m in Sources */,
+				5D0039451A7AD853000D2E66 /* Instructions.m in Sources */,
+				5D187A241A7B11A600EBDF37 /* Credits.m in Sources */,
 				5B121038197487F2004C1E1D /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1231,6 +1255,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1266,6 +1292,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

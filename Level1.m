@@ -128,18 +128,6 @@
     return YES;
 }
 
--(void)nextLevel:(id)sender{
-    
-    NSLog(@"Button Pressed again.");
-    
-    [[OALSimpleAudio sharedInstance] playEffect:@"Applause.wav"];
-    
-    id transition = [CCTransition transitionFadeWithDuration:2.0];
-    
-    CCScene *secondLevel = [CCBReader loadAsScene:@"Level2"];
-    [[CCDirector sharedDirector] replaceScene:secondLevel withTransition:transition];
-    
-}
 
 -(void)pause:(id)sender{
     [[CCDirector sharedDirector] pause];
