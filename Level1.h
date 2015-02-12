@@ -6,9 +6,13 @@
 //  Copyright (c) 2015 Apportable. All rights reserved.
 //
 
-@interface Level1 : CCScene
+@interface Level1 : CCScene <UIAlertViewDelegate>
 {
     int score;
+    int timeSec;
+    int timeMin;
+    BOOL paused;
+    NSTimer *timer;
     CCNode *_arrow;
     CCNode *_soccerBall;
     CCNode *_ground;

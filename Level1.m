@@ -22,6 +22,14 @@
 }
 
 -(void)onEnter{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
+    timeSec = 0;
+    timeMin = 0;
+    [self StartTimer];
     // Cant quite this to have the proper physics for flight but I am working on that
     _soccerBall = [CCSprite spriteWithImageNamed:@"ImageAssets/BallHD_03.png"];
     _soccerBall.physicsBody = [CCPhysicsBody bodyWithCircleOfRadius:(_soccerBall.contentSize.width/2) andCenter:CGPointMake(8.0, 8.0)];
@@ -37,7 +45,7 @@
 
 -(void)hitBall:(id)sender{
     
-    [self changeScore];
+    //[self changeScore];
     
     float betterAngle;
     
@@ -56,7 +64,7 @@
 }
 
 // I have no idea why this stops updating after it gets to 2!
--(void)changeScore{
+/*-(void)changeScore{
     if (score == 0){
         [_par setString:[NSString stringWithFormat:@"1"]];
         score = 1;
@@ -65,7 +73,7 @@
         NSLog(@"%d", newScore);
         [_par setString:[NSString stringWithFormat:@"%d", newScore]];
     }
-}
+}*/
 
 // This resets the ball to the starting position after going off screen
 - (void)update:(CCTime)delta{
@@ -128,13 +136,65 @@
     return YES;
 }
 
+-(void) StartTimer
+{
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerTick:) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+}
+
+- (void)timerTick:(NSTimer *)timer
+{
+    if (paused == NO){
+        timeSec++;
+        if (timeSec == 90)
+        {
+            UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Time's Up!"
+                                                         message:@"You have run out of time!  The level will now be reset."
+                                                        delegate:self
+                                               cancelButtonTitle:@"Okay."
+                                               otherButtonTitles: nil];
+        [alert show];
+            paused = YES;
+        }
+        NSString* timeNow = [NSString stringWithFormat:@"%02d", timeSec];
+        [_par setString: timeNow];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        CCScene *firstLevel = [CCBReader loadAsScene:@"Level1"];
+        [[CCDirector sharedDirector] replaceScene:firstLevel];
+    }
+}
 
 -(void)pause:(id)sender{
+    paused = YES;
     [[CCDirector sharedDirector] pause];
 }
 
 -(void)resume:(id)sender{
     [[CCDirector sharedDirector] resume];
+    paused = NO;
+}
+
+-(void)appWillResignActive:(NSNotification*)note
+{
+    NSLog(@"App went into the background.");
+    paused = YES;
+}
+-(void)appWillTerminate:(NSNotification*)note
+{
+    [timer invalidate];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillTerminateNotification object:nil];
+    
+}
+-(void)applicationDidBecomeActive:(NSNotification*)note{
+    NSLog(@"App came back.");
+    paused = NO;
 }
 
 @end
