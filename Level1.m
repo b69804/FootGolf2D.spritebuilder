@@ -27,8 +27,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     
-    timeSec = 0;
-    timeMin = 0;
+    timeSec = 90;
     [self StartTimer];
     // Cant quite this to have the proper physics for flight but I am working on that
     _soccerBall = [CCSprite spriteWithImageNamed:@"ImageAssets/BallHD_03.png"];
@@ -118,6 +117,8 @@
     // Once I get the physics worked out, this will identify if the is in the cup.  I will then transition the scene to the next level
     if (_soccerBall.position.x <= 470.0 && _soccerBall.position.y <= 118.0 && _soccerBall.position.x >= 457.0 && _soccerBall.position.y >= 108.0) {
         NSLog(@"Ball is in the hole.");
+        // This is where I get the User's score.  It will be the time it took the user to get the ball in the hole.
+        usersScore = (90 - timeSec);
         
         [[OALSimpleAudio sharedInstance] playEffect:@"Applause.wav"];
         
@@ -145,15 +146,15 @@
 - (void)timerTick:(NSTimer *)timer
 {
     if (paused == NO){
-        timeSec++;
-        if (timeSec == 90)
+        timeSec--;
+        if (timeSec == 0)
         {
             UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Time's Up!"
-                                                         message:@"You have run out of time!  The level will now be reset."
+                                                        message:@"You have run out of time!  The level will now be reset."
                                                         delegate:self
-                                               cancelButtonTitle:@"Okay."
-                                               otherButtonTitles: nil];
-        [alert show];
+                                                        cancelButtonTitle:@"Okay."
+                                                        otherButtonTitles: nil];
+            [alert show];
             paused = YES;
         }
         NSString* timeNow = [NSString stringWithFormat:@"%02d", timeSec];

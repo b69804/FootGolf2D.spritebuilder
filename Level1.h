@@ -10,7 +10,7 @@
 {
     int score;
     int timeSec;
-    int timeMin;
+    int usersScore;
     BOOL paused;
     NSTimer *timer;
     CCNode *_arrow;
