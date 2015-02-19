@@ -10,8 +10,8 @@
                 <outlet property="getScores" destination="Pp3-XE-6Cy" id="4iC-MQ-ImD"/>
                 <outlet property="goBack" destination="PWY-kO-KZn" id="Rch-7n-iSp"/>
                 <outlet property="levelPicker" destination="J0R-gk-wy8" id="tiN-ef-7qD"/>
+                <outlet property="selectToTweet" destination="VrL-xQ-L0v" id="kry-2n-nuq"/>
                 <outlet property="tableOfScores" destination="9ay-K9-uJr" id="rQU-vU-qh4"/>
-                <outlet property="tweet" destination="XUu-V2-heN" id="Ie4-hV-IFf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,10 +21,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J0R-gk-wy8">
-                    <rect key="frame" x="107" y="8" width="355" height="70"/>
+                    <rect key="frame" x="14" y="10" width="212" height="162"/>
                 </pickerView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pp3-XE-6Cy">
-                    <rect key="frame" x="215" y="140" width="138" height="30"/>
+                    <rect key="frame" x="260" y="23" width="138" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="Get High Scores">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,21 +34,11 @@
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="9ay-K9-uJr">
-                    <rect key="frame" x="34" y="169" width="500" height="135"/>
+                    <rect key="frame" x="34" y="200" width="500" height="112"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUu-V2-heN" userLabel="Tweet">
-                    <rect key="frame" x="489" y="23" width="71" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="Tweet Score">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="tweetScore:" destination="-1" eventType="touchUpInside" id="P1y-ND-RFF"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWY-kO-KZn">
-                    <rect key="frame" x="8" y="23" width="71" height="30"/>
+                    <rect key="frame" x="489" y="23" width="71" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <state key="normal" title="Back">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -57,11 +47,17 @@
                         <action selector="onBack:" destination="-1" eventType="touchUpInside" id="lNj-T5-KX9"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a high score to tweet about it" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VrL-xQ-L0v">
+                    <rect key="frame" x="283" y="171" width="277" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <point key="canvasLocation" x="432" y="286"/>
+            <point key="canvasLocation" x="432" y="199"/>
         </view>
     </objects>
 </document>

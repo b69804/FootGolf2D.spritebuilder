@@ -120,6 +120,7 @@
     if (_soccerBall.position.x <= 470.0 && _soccerBall.position.y <= 118.0 && _soccerBall.position.x >= 457.0 && _soccerBall.position.y >= 108.0) {
         NSLog(@"Ball is in the hole.");
         // This is where I get the User's score.  It will be the time it took the user to get the ball in the hole.
+        // Score is saved to both GameCenter and Locally.
         usersScore = (90 - timeSec);
         _leaderboardIdentifier = @"Level1";
         GKScore *gamecenterScore = [[GKScore alloc] initWithLeaderboardIdentifier:_leaderboardIdentifier];
@@ -180,6 +181,7 @@
     
     if([title isEqualToString:@"Save!"])
     {
+        // When the ball goes in the hole, an Alert is shown asking the user to input a name to save the score as locally.
         UITextField *name = [alertView textFieldAtIndex:0];
         PFObject *level1Score = [PFObject objectWithClassName:@"GameScore"];
         level1Score[@"score"] = [NSNumber numberWithInt:usersScore];
@@ -189,6 +191,7 @@
         
         [level1Score saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
+                // When the score saves to Parse, the transition to the next screen occurs.
                 NSLog(@"Score Saved.");
                 [[CCDirector sharedDirector] resume];
                 [[OALSimpleAudio sharedInstance] playEffect:@"Applause.wav"];
@@ -204,9 +207,6 @@
                 // There was a problem, check error.description
             }
         }];
-        
-        
-
     } else if ([title isEqualToString:@"Okay."])
     {
         CCScene *firstLevel = [CCBReader loadAsScene:@"Level1"];

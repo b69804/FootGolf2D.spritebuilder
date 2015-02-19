@@ -13,7 +13,7 @@
 {
     IBOutlet UIButton *getScores;
     IBOutlet UIButton *goBack;
-    IBOutlet UIButton *tweet;
+    IBOutlet UILabel *selectToTweet;
 }
 
 @property (weak, nonatomic) IBOutlet UIPickerView *levelPicker;
@@ -21,6 +21,5 @@
 
 -(IBAction)onSelect:(id)sender;
 -(IBAction)onBack:(id)sender;
--(IBAction)tweetScore:(id)sender;
 
 @end

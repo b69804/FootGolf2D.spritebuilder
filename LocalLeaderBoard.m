@@ -25,6 +25,7 @@
     [super viewDidLoad];
     _levels = @[@"Select Level", @"Level 1", @"Level 2", @"Level 3"];
     allScores = [[NSMutableArray alloc] init];
+    selectToTweet.hidden = true;
     
     self.levelPicker.dataSource = self;
     self.levelPicker.delegate = self;
@@ -40,14 +41,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;
 }
 
-- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return _levels.count;
+    int pickerCount = (int) _levels.count;
+    
+    return pickerCount;
 }
 
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
@@ -82,6 +85,8 @@
     
 }
 
+
+// User selects the level to show the high scores for.  If no scores are present, an alert is shown to go play that level.  This is my filter.
 -(IBAction)onSelect:(id)sender
 {
     PFQuery *query = [PFQuery queryWithClassName:@"GameScore"];
@@ -106,6 +111,7 @@
                     [self.tableOfScores reloadData];
                 }
                 self.tableOfScores.hidden = false;
+                selectToTweet.hidden = false;
             }
         } else {
             
@@ -116,9 +122,7 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0){
-    
         self.tableOfScores.hidden = true;
-    
     }
 }
 
@@ -127,17 +131,11 @@
     [[CCDirector sharedDirector] dismissViewControllerAnimated:YES completion:nil];
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] presentScene:mainScene];
-    NSLog(@"Clicked back.");
 }
 
--(IBAction)tweetScore:(id)sender
-{
-}
-
+// When the user selects a high score, they can tweet that high score.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Clicked tableCell.");
-    
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
     {
         SLComposeViewController *tweetSheet = [SLComposeViewController

@@ -34,6 +34,7 @@
     
 }
 
+// This is for showing GameCenter.  It only shows level 1 top scores for the signed in user.
 -(void)showLeaderBoard:(id)sender{
     
     _leaderboardIdentifier = @"Level1";
@@ -64,12 +65,14 @@
 
 }
 
+// This brings you to the local leaderboard
 -(void)showLocalLBoard:(id)sender
 {
     LocalLeaderBoard *lVC = [[LocalLeaderBoard alloc] init];
     [[CCDirector sharedDirector] presentViewController:lVC animated:YES completion:nil];
 }
 
+// Authenitcates the GameCenter user.  If no one is signed in, it prompts the sign in screen.
 -(void)authenticateLocalPlayer{
     GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
     
