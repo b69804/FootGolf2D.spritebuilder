@@ -24,7 +24,7 @@
  */
 
 #import "cocos2d.h"
-
+#import <Parse/Parse.h>
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
 
@@ -49,6 +49,12 @@
     // Configure CCFileUtils to work with SpriteBuilder
     [CCBReader configureCCFileUtils];
     
+    [Parse enableLocalDatastore];
+    
+    // Initialize Parse.
+    [Parse setApplicationId:@"Niwjt8ZiA3PyWoqJUXCt8SxtwyiCA3LttM185twY"
+                  clientKey:@"rxNoFa0xa8RZqWn5jTuTa6p2vcwAyAjeAHHtOT3L"];
+    
     // Do any extra configuration of Cocos2d here (the example line changes the pixel format for faster rendering, but with less colors)
     //[cocos2dSetup setObject:kEAGLColorFormatRGB565 forKey:CCConfigPixelFormat];
     
@@ -61,5 +67,7 @@
 {
     return [CCBReader loadAsScene:@"MainScene"];
 }
+
+
 
 @end

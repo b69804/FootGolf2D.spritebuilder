@@ -20,6 +20,9 @@
     CCSlider *slideBar;
     CCLabelTTF *_par;
     CCPhysicsNode *_physicsNode;
+    
 }
+
+@property (nonatomic, strong) NSString *leaderboardIdentifier;
 
 @end

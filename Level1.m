@@ -2,6 +2,8 @@
 #import "Level1.h"
 #import "cocos2d.h"
 #import "CCPhysicsNode.h"
+#import <Parse/Parse.h>
+#import <GameKit/GameKit.h>
 
 @implementation Level1
 {
@@ -119,14 +121,24 @@
         NSLog(@"Ball is in the hole.");
         // This is where I get the User's score.  It will be the time it took the user to get the ball in the hole.
         usersScore = (90 - timeSec);
-        
-        [[OALSimpleAudio sharedInstance] playEffect:@"Applause.wav"];
-        
-        id transition = [CCTransition transitionFadeWithDuration:3.0];
-        
-        CCScene *secondLevel = [CCBReader loadAsScene:@"Level2"];
-        [[CCDirector sharedDirector] replaceScene:secondLevel withTransition:transition];
+        _leaderboardIdentifier = @"Level1";
+        GKScore *gamecenterScore = [[GKScore alloc] initWithLeaderboardIdentifier:_leaderboardIdentifier];
+        gamecenterScore.value = usersScore;
+        [GKScore reportScores:@[gamecenterScore] withCompletionHandler:^(NSError *error) {
+            if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+            }
+        }];
+        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Save your Score!"
+                                                         message:@"Enter a Name to save your score under."
+                                                        delegate:self
+                                               cancelButtonTitle:@"Save!"
+                                               otherButtonTitles: nil];
+        alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        [alert show];
+        [[CCDirector sharedDirector] pause];
         [_soccerBall removeFromParent];
+        
     }
     
 }
@@ -164,11 +176,42 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0)
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    
+    if([title isEqualToString:@"Save!"])
+    {
+        UITextField *name = [alertView textFieldAtIndex:0];
+        PFObject *level1Score = [PFObject objectWithClassName:@"GameScore"];
+        level1Score[@"score"] = [NSNumber numberWithInt:usersScore];
+        NSString *savedName = name.text;
+        level1Score[@"whatLevel"] = @"Level 1";
+        level1Score[@"playerName"] = savedName;
+        
+        [level1Score saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"Score Saved.");
+                [[CCDirector sharedDirector] resume];
+                [[OALSimpleAudio sharedInstance] playEffect:@"Applause.wav"];
+                
+                id transition = [CCTransition transitionFadeWithDuration:3.0];
+                [timer invalidate];
+                
+                CCScene *secondLevel = [CCBReader loadAsScene:@"Level2"];
+                [[CCDirector sharedDirector] replaceScene:secondLevel withTransition:transition];
+                
+                
+            } else {
+                // There was a problem, check error.description
+            }
+        }];
+        
+        
+
+    } else if ([title isEqualToString:@"Okay."])
     {
         CCScene *firstLevel = [CCBReader loadAsScene:@"Level1"];
         [[CCDirector sharedDirector] replaceScene:firstLevel];
-    }
+    };
 }
 
 -(void)pause:(id)sender{
