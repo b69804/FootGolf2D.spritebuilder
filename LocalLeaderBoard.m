@@ -106,7 +106,7 @@
                     int score = [[object objectForKey:@"score"] intValue];
                     NSMutableString *highScore;
                     highScore = [[NSMutableString alloc] init];
-                    [highScore setString:[NSString stringWithFormat:@"%@ got the score of %d seconds", name, score]];
+                    [highScore setString:[NSString stringWithFormat:@"%@ got a score of %d seconds", name, score]];
                     [allScores addObject:highScore];
                     [self.tableOfScores reloadData];
                 }
