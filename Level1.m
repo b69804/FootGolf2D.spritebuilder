@@ -28,7 +28,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
-    
+    outOfBoundsPerc = 0.0;
+    ballsOutOfBounds = 0;
+    score = 0;
+    isOut = false;
     timeSec = 90;
     [self StartTimer];
     // Cant quite this to have the proper physics for flight but I am working on that
@@ -46,7 +49,13 @@
 
 -(void)hitBall:(id)sender{
     
-    //[self changeScore];
+    score++;
+    
+    if (!isOut) {
+        ballsOutOfBounds = 0;
+    } else {
+        isOut = false;
+    }
     
     float betterAngle;
     
@@ -62,19 +71,9 @@
     
     [[OALSimpleAudio sharedInstance] playEffect:@"SportGolf DM006_62.wav"];
     
+    
+    
 }
-
-// I have no idea why this stops updating after it gets to 2!
-/*-(void)changeScore{
-    if (score == 0){
-        [_par setString:[NSString stringWithFormat:@"1"]];
-        score = 1;
-    } else {
-        int newScore = (score + 1);
-        NSLog(@"%d", newScore);
-        [_par setString:[NSString stringWithFormat:@"%d", newScore]];
-    }
-}*/
 
 // This resets the ball to the starting position after going off screen
 - (void)update:(CCTime)delta{
@@ -87,6 +86,12 @@
         _soccerBall.physicsBody.elasticity = 0.30;
         _soccerBall.position = ccp(54.8, 99.7);
         _soccerBall.physicsBody.allowsRotation = NO;
+        ballsOutOfBounds++;
+        outOfBoundsPerc = (20 * ballsOutOfBounds);
+        [self updateOutOfBounds];
+        [self firstShotOut];
+        NSLog(@"%d", ballsOutOfBounds);
+        isOut = true;
         [_physicsNode addChild:_soccerBall];
     }
     
@@ -99,6 +104,12 @@
         _soccerBall.physicsBody.elasticity = 0.30;
         _soccerBall.position = ccp(54.8, 99.7);
         _soccerBall.physicsBody.allowsRotation = NO;
+        ballsOutOfBounds++;
+        outOfBoundsPerc = (20 * ballsOutOfBounds);
+        [self updateOutOfBounds];
+        [self firstShotOut];
+        NSLog(@"%d", ballsOutOfBounds);
+        isOut = true;
         [_physicsNode addChild:_soccerBall];
     }
     
@@ -111,10 +122,14 @@
         _soccerBall.physicsBody.elasticity = 0.30;
         _soccerBall.position = ccp(54.8, 99.7);
         _soccerBall.physicsBody.allowsRotation = NO;
+        ballsOutOfBounds++;
+        outOfBoundsPerc = (20 * ballsOutOfBounds);
+        [self updateOutOfBounds];
+        [self firstShotOut];
+        NSLog(@"%d", ballsOutOfBounds);
+        isOut = true;
         [_physicsNode addChild:_soccerBall];
     }
-    
-    
     
     // Once I get the physics worked out, this will identify if the is in the cup.  I will then transition the scene to the next level
     if (_soccerBall.position.x <= 470.0 && _soccerBall.position.y <= 118.0 && _soccerBall.position.x >= 457.0 && _soccerBall.position.y >= 108.0) {
@@ -130,6 +145,33 @@
                 NSLog(@"%@", [error localizedDescription]);
             }
         }];
+        
+        if (score == 1){
+            GKAchievement *timeAchievement = nil;
+            timeAchievement = [[GKAchievement alloc] initWithIdentifier:@"firstShot"];
+            timeAchievement.percentComplete = 100;
+            timeAchievement.showsCompletionBanner = YES;
+            NSArray *achievementArray = @[timeAchievement];
+            [GKAchievement reportAchievements:achievementArray withCompletionHandler:^(NSError *error) {
+                if (error != nil) {
+                    NSLog(@"%@", [error localizedDescription]);
+                }
+            }];
+        }
+        
+        if (usersScore <10){
+            GKAchievement *timeAchievement = nil;
+            timeAchievement = [[GKAchievement alloc] initWithIdentifier:@"lessthan_10"];
+            timeAchievement.percentComplete = 100;
+            timeAchievement.showsCompletionBanner = YES;
+            NSArray *achievementArray = @[timeAchievement];
+            [GKAchievement reportAchievements:achievementArray withCompletionHandler:^(NSError *error) {
+                if (error != nil) {
+                    NSLog(@"%@", [error localizedDescription]);
+                }
+            }];
+        }
+        
         UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Save your Score!"
                                                          message:@"Enter a Name to save your score under."
                                                         delegate:self
@@ -139,9 +181,40 @@
         [alert show];
         [[CCDirector sharedDirector] pause];
         [_soccerBall removeFromParent];
-        
     }
-    
+}
+
+-(void)firstShotOut
+{
+    if (score == 1){
+        GKAchievement *timeAchievement = nil;
+        timeAchievement = [[GKAchievement alloc] initWithIdentifier:@"firstInFirstOut"];
+        timeAchievement.percentComplete = 100;
+        timeAchievement.showsCompletionBanner = YES;
+        NSArray *achievementArray = @[timeAchievement];
+        [GKAchievement reportAchievements:achievementArray withCompletionHandler:^(NSError *error) {
+            if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+            }
+        }];
+    }
+}
+
+-(void)updateOutOfBounds
+{
+        GKAchievement *negativeAchievment = nil;
+        negativeAchievment = [[GKAchievement alloc] initWithIdentifier:@"tooManyMissHits"];
+        negativeAchievment.percentComplete = outOfBoundsPerc;
+        if (ballsOutOfBounds == 5){
+            negativeAchievment.showsCompletionBanner = YES;
+        }
+        NSArray *achievementArray = @[negativeAchievment];
+        [GKAchievement reportAchievements:achievementArray withCompletionHandler:^(NSError *error) {
+            if (error != nil) {
+                NSLog(@"%@", [error localizedDescription]);
+            } else {
+            }
+        }];
 }
 
 - (BOOL)ccPhysicsCollisionPreSolve:(CCPhysicsCollisionPair *)pair ball:(CCNode *)_soccerBall tree:(CCNode *)thisIsATree

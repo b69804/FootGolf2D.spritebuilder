@@ -11,7 +11,10 @@
     int score;
     int timeSec;
     int usersScore;
+    int ballsOutOfBounds;
+    float outOfBoundsPerc;
     BOOL paused;
+    BOOL isOut;
     NSTimer *timer;
     CCNode *_arrow;
     CCNode *_soccerBall;
@@ -22,6 +25,7 @@
     CCPhysicsNode *_physicsNode;
     
 }
+-(void)updateOutOfBounds;
 
 @property (nonatomic, strong) NSString *leaderboardIdentifier;
 
