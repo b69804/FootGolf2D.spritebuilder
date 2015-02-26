@@ -145,7 +145,7 @@
                 NSLog(@"%@", [error localizedDescription]);
             }
         }];
-        
+        // This is my measureable achievement.  If the user gets the ball into the hole on their first shot, they get this achievement.  
         if (score == 1){
             GKAchievement *timeAchievement = nil;
             timeAchievement = [[GKAchievement alloc] initWithIdentifier:@"firstShot"];
@@ -159,6 +159,7 @@
             }];
         }
         
+        // This is my completion achievement.  If the user's score is less than 10 seconds, they earn this achievement.
         if (usersScore <10){
             GKAchievement *timeAchievement = nil;
             timeAchievement = [[GKAchievement alloc] initWithIdentifier:@"lessthan_10"];
@@ -184,6 +185,7 @@
     }
 }
 
+// This is my negative achievement.  If the first shot the user takes goes out of bound, then they get his achievement.
 -(void)firstShotOut
 {
     if (score == 1){
@@ -202,6 +204,7 @@
 
 -(void)updateOutOfBounds
 {
+    // This is my incremental achievement.  When the user hits 5 balls out of bounds in a row, they will earn this achievement.
         GKAchievement *negativeAchievment = nil;
         negativeAchievment = [[GKAchievement alloc] initWithIdentifier:@"tooManyMissHits"];
         negativeAchievment.percentComplete = outOfBoundsPerc;
